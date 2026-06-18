@@ -1,0 +1,18 @@
+# Secrets
+.env
+**/.env
+
+# Python
+.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Generated output
+output/
+src/output/
+
+# R session files
+.RData
+.Rhistory
