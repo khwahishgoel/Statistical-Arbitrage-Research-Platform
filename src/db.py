@@ -6,18 +6,25 @@ from datetime import datetime
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import certifi
 
 load_dotenv(Path(__file__).parent / ".env")
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 DB_NAME   = "stat_arb"
 
-_client: MongoClient | None = None
-
+_client = MongoClient(
+    MONGO_URI,
+    tls=True,
+    tlsCAFile=certifi.where(),
+)
 
 def get_db():
     global _client
     if _client is None:
-        _client = MongoClient(MONGO_URI)
+        _client = MongoClient(
+            MONGO_URI,
+            tlsCAFile="/opt/homebrew/etc/openssl@3/cert.pem",
+        )
     return _client[DB_NAME]
 
 
