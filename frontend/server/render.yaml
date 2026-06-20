@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: stat-arb-api
+    env: node
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: CLIENT_URL
+        sync: false
